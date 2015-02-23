@@ -1,0 +1,77 @@
+Nicholas Ward
+CSE 20212-01  Lab 5
+2-25-15
+
+Part 1 Github:
+	The URL to my github account is: https://github.com/nward3/
+
+Part 2 Templated Class:
+	A note on the templated class. The Puzzle object of 'int' type should have a file
+with spaces between each number to ensure the program does not interpret the line as one
+long int.
+
+Part 3 Sudoku: 
+	From the user's perspective, the user uses the program to load an incomplete 9x9 Sudoku
+puzzle and then tries to complete the puzzle. The user can expect the program to prompt the user
+for an input file and then outputs that specified puzzle to the screen. The program then will keep
+looping through and prompting the user to specify a new row and column (both between 0 and 8
+inclusive), and a number for the puzzle, until the Sudoku puzzle is complete (all the blank spots
+are filled with valid inputs) or until the user opts to quit. The user can expect the program to
+check that a spot can only be edited if the spot is empty and the selected input is valid based on
+the row, column, and mini 3x3 grid. In addition, the user can expect the program to display the
+updated puzzle after each new input and then recognize when the puzzle is complete.
+	From the programmer's perspective, the program works by implementing a templated class.
+For this third part of lab5, the program instantiates an object of type int using the templated
+Puzzle class. The program basically works through the constructor and the 'play' function. At the
+start, the constructor works by having the user specify a file that contains the Sudoku puzzle of
+interest. The input is then read into the program and stored in a vector that is then pushed into
+the main 9x9 Sudoku board, allocating the memory through the push_back function and clearing the
+memory of the temporary vector after each push_back into the Sudoku board. After the Sudoku board
+is set, the play function begins and runs until the game board is complete or the user opts to
+quit trying to finish it. At the beginning of each iteration of the while loop, the values of the
+row and column are reset so that the user can specify new values. The program prompts the user
+for a row and column as long as the respective values are outside the range of 0 to 8. Once the
+user has specified the spot on the grid, the program uses the 'isEmpty' function to check if the
+spot of interest is empty. The user is limited to changing cells that are empty (those that
+are 0), and once a cell has a non-zero number, it cannot be modified. If the location is not
+empty, then the user is prompted to specify an empty spot and no value is added to the Sudoku
+puzzle. If the location is empty, the 'change' function is called. This function allows the user
+to specify the value they would like to place. The function then checks that the value specified
+is within the 1-9 range and that the number does not already appear in the row, column, or 3x3
+grid. If it meets these criteria, then the number is placed in the puzzle. Otherwise, the user is
+informed of their invalid input selection and given the opportunity to try again or to just
+specify a new location. After placing the new value, the 'isComplete' function is called to check
+if the board was completed by the last move. Regardless, the updated puzzle is then displayed. If
+the game was completed by the last move, then the user is informed the puzzle is finished.
+Otherwise, the program prompts the user to continue or quit. Continuing goes through the loop
+again, while opting to quit end the program by wishing the user better luck next time.
+	The program was verified using the Sudoku puzzle supplied in the lab5 document. The puzzle
+was solved and the proper inputs were placed into the Sudoku program. Once all the values were
+placed, the program properly output the message informing me of the puzzle being complete.
+Additionally, the program was run testing numerous faulty inputs and each time a faulty value was
+input, the proper error message came up and the value was denied. In addition, the program seemed
+to be properly denying values based on the same value already being in the same row, column or
+3x3 grid. Also the program seemed to be properly exiting when the user did not win andjust opted
+to quit. Collectively, these observations seemed to confirm the functionality of the Sudoku program.
+	In general, there were some aspects of the program that worked well, while some did not work
+as well. To start, I think that having the 'play' function worked well, rather than doing most of
+the play function's action in the driver program. This allowed me to simply call the other functions
+from within play. Additionally, within 'play', I decided to check for valid row and column
+specifications and wait until valid inputs were obtained before continuing. Similarly, I added some
+other functions to the Puzzle class that were not in the Puzzle class in Part 2 of the lab. These
+additional functions included functions to check if the board was complete, if a location was valid,
+if a location was empty, and to update the board. I also found it useful to have my 'isEmpty' 
+function separate from my 'isValid' function as it gave me more flexibility with the conditional
+statements, especially those in my 'change' function. Additionally, it gave me the option to use
+more conditionals in 'play' and skip some parts that would not be necessary based on the user's
+input. One aspect I found very useful was adding the option to specify a new location from within my
+change function, which allowed the user to leave the function in the event they could not place
+a valid value. Since the user cannot change a value after it was placed, this function was useful in
+enabling the user to get back to the 'play' function and the then quit the puzzle. The user could
+then always restart the program and try the specified puzzle again, rather than just be stuck with
+no valid options and the program running. One aspect I think could have worked better was my
+'isValid' function. The function is fairly long because I break up the cases for checking the 3x3
+grids based on the row and column values specified. This resulted in fairly long series of if and
+else if statements that might be somewhat cumbersome to follow. However, I put some extra comments
+in this section to help understand the reasoning behind that coding choice. Overall, I would say the
+structure of the program led to a successful class development and implementation.
